@@ -53,14 +53,6 @@
         {
           "contactsPermission": "Allow $(PRODUCT_NAME) to access your contacts to assign custom ringtones."
         }
-      ],
-      [
-        "expo-media-library",
-        {
-          "photosPermission": "Allow $(PRODUCT_NAME) to access your audio files.",
-          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save ringtones.",
-          "isAccessMediaLocationEnabled": true
-        }
       ]
     ],
     "experiments": {

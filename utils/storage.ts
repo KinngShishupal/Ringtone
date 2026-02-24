@@ -1,5 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RingtoneSettings, ContactRingtoneMapping, SIMRingtoneMapping } from '@/types';
+import { StorageAdapter } from './storageAdapter';
 
 const STORAGE_KEYS = {
   RINGTONE_SETTINGS: '@ringtone_settings',
@@ -11,7 +11,7 @@ const STORAGE_KEYS = {
 export const StorageService = {
   async getSettings(): Promise<RingtoneSettings> {
     try {
-      const settings = await AsyncStorage.getItem(STORAGE_KEYS.RINGTONE_SETTINGS);
+      const settings = await StorageAdapter.getItem(STORAGE_KEYS.RINGTONE_SETTINGS);
       if (settings) {
         return JSON.parse(settings);
       }
@@ -30,7 +30,7 @@ export const StorageService = {
 
   async saveSettings(settings: RingtoneSettings): Promise<void> {
     try {
-      await AsyncStorage.setItem(
+      await StorageAdapter.setItem(
         STORAGE_KEYS.RINGTONE_SETTINGS,
         JSON.stringify(settings)
       );
@@ -127,7 +127,7 @@ export const StorageService = {
 
   async clearAllSettings(): Promise<void> {
     try {
-      await AsyncStorage.removeItem(STORAGE_KEYS.RINGTONE_SETTINGS);
+      await StorageAdapter.removeItem(STORAGE_KEYS.RINGTONE_SETTINGS);
     } catch (error) {
       console.error('Error clearing settings:', error);
       throw error;

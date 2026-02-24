@@ -1,14 +1,8 @@
-import * as MediaLibrary from 'expo-media-library';
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
 import { Ringtone } from '@/types';
 
 export const RingtoneManager = {
-  async requestPermissions(): Promise<boolean> {
-    const { status } = await MediaLibrary.requestPermissionsAsync();
-    return status === 'granted';
-  },
-
   async getSystemRingtones(): Promise<Ringtone[]> {
     const defaultRingtones: Ringtone[] = [
       {
@@ -42,34 +36,39 @@ export const RingtoneManager = {
         uri: 'system://ringtone/echo',
         isCustom: false,
       },
+      {
+        id: 'default_6',
+        name: 'Chime',
+        uri: 'system://ringtone/chime',
+        isCustom: false,
+      },
+      {
+        id: 'default_7',
+        name: 'Ascending',
+        uri: 'system://ringtone/ascending',
+        isCustom: false,
+      },
+      {
+        id: 'default_8',
+        name: 'Bell',
+        uri: 'system://ringtone/bell',
+        isCustom: false,
+      },
+      {
+        id: 'default_9',
+        name: 'Piano',
+        uri: 'system://ringtone/piano',
+        isCustom: false,
+      },
+      {
+        id: 'default_10',
+        name: 'Guitar',
+        uri: 'system://ringtone/guitar',
+        isCustom: false,
+      },
     ];
 
-    try {
-      const hasPermission = await this.requestPermissions();
-      if (!hasPermission) {
-        return defaultRingtones;
-      }
-
-      const media = await MediaLibrary.getAssetsAsync({
-        mediaType: 'audio',
-        first: 50,
-      });
-
-      const audioRingtones: Ringtone[] = media.assets
-        .filter((asset) => asset.duration && asset.duration < 30)
-        .map((asset) => ({
-          id: asset.id,
-          name: asset.filename.replace(/\.[^/.]+$/, ''),
-          uri: asset.uri,
-          duration: asset.duration,
-          isCustom: false,
-        }));
-
-      return [...defaultRingtones, ...audioRingtones];
-    } catch (error) {
-      console.error('Error loading system ringtones:', error);
-      return defaultRingtones;
-    }
+    return defaultRingtones;
   },
 
   async pickCustomRingtone(): Promise<Ringtone | null> {
