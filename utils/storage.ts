@@ -2,10 +2,10 @@ import { RingtoneSettings, ContactRingtoneMapping, SIMRingtoneMapping } from '@/
 import { StorageAdapter } from './storageAdapter';
 
 const STORAGE_KEYS = {
-  RINGTONE_SETTINGS: '@ringtone_settings',
-  CONTACT_MAPPINGS: '@contact_ringtone_mappings',
-  SIM_MAPPINGS: '@sim_ringtone_mappings',
-  DEFAULT_RINGTONE: '@default_ringtone',
+  RINGTONE_SETTINGS: 'ringtone_settings',
+  CONTACT_MAPPINGS: 'contact_ringtone_mappings',
+  SIM_MAPPINGS: 'sim_ringtone_mappings',
+  DEFAULT_RINGTONE: 'default_ringtone',
 };
 
 export const StorageService = {
